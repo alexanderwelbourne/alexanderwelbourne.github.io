@@ -5,7 +5,10 @@ dateStart: "Sep 2018"
 dateEnd: "Present"
 ---
 
-Iure illo neque tempora, voluptatem est quaerat voluptas praesentium ipsa dolorem dignissimos nulla ratione distinctio quae maiores eligendi nostrum? Quibusdam, debitis voluptatum, lorem ipsum dolor. Sit amet consectetur adipisicing elit.
+\
+Outside of my normal work, I am a freelance wedding and events photographer. I provide clients with a guest-eye view of their wedding or event, allowing them to relive the day with candid photos that capture the heart of the event. I have succeeded if follow my two golden rules.
 
-- Sit amet consectetur adipisicing elit.
+**Golden Rules of Events Photography**
+- Don't be the story : _You are there to capture someone else's day. Keep it theirs, don't insert yourself into it._
+- Capture their story : _Tell the story, its key moments and its emotions with your images. Let your client live it again and again._
 
