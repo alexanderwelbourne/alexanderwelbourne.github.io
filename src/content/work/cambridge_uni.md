@@ -8,6 +8,8 @@ dateEnd: "Dec 2019"
 \
 Strain-mediated voltage control of magnetic systems is an under-explored, but rich avenue of research with promise for ultra-low-energy next-generation computing devices. My PhD broke ground demonstrating the potential for strain control of advanced magnetic systems as a rewarding avenue of study.
 
+I was based in Cowburn Group at the Cavendish Labs, University of Cambridge. My supervisor was Amalio Fernández-Pacheco a who now heads a world leading lab studying the ["Physics of Three-dimensional Nanomaterials"](https://sites.google.com/view/amaliofernandezpacheco/).
+
 **Impact and Dissemination**
 - Thesis, _“Strain control of advanced magnetic systems for spintronic applications”_, published [online](https://doi.org/10.17863/CAM.81785) with over 40 downloads.
 - MOKE image analysis app published [online](https://www.mathworks.com/matlabcentral/fileexchange/72494-moke-image-analysis). Over 70 downloads.
