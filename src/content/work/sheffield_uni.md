@@ -2,7 +2,7 @@
 company: "University of Sheffield"
 role: "Postdoctoral Researcher in Spintronic Neuromorphic Devices"
 dateStart: "Dec 2019"
-dateEnd: "Present"
+dateEnd: "March 2025"
 ---
 
 \
