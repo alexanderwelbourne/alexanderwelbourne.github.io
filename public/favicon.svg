@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 373 373">
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 364 364">
   <defs>
     <clipPath id="clippath">
-      <rect x="75.92" y="75" width="212.16" height="214" style="fill: none;"/>
+      <rect x="71.42" y="70.5" width="212.16" height="214" style="fill: none;"/>
     </clipPath>
     <clipPath id="clippath-1">
-      <rect x="75.92" y="75" width="212.16" height="214" style="fill: none;"/>
+      <rect x="71.42" y="70.5" width="212.16" height="214" style="fill: none;"/>
     </clipPath>
   </defs>
-  <circle cx="186.5" cy="186.5" r="182" style="fill: #e5e7eb; stroke: #e5e7eb; stroke-miterlimit: 10; stroke-width: 9px;"/>
+  <circle cx="182" cy="182" r="182" style="fill: #e5e7eb;"/>
   <g id="Artwork_15" data-name="Artwork 15">
     <g style="clip-path: url(#clippath);">
-      <path d="M144.38,145.39l16.44,71.75h-32.76l16.32-71.75ZM123.24,113.68l-47.32,175.32h34.64l10.57-43.33h46.38l10.8,43.33h34.64l-47.32-175.32h-42.39Z" style="fill: #000000;"/>
-      <polygon points="251.27 113.66 260.84 242.36 230.66 159.1 201.89 159.1 199.31 242.36 167.31 113.66 137.02 113.66 185.1 288.98 217.16 288.98 221.93 196.92 255.79 288.98 288.08 288.98 288.08 288.91 281.8 113.66 251.27 113.66" style="fill: #000000;"/>
+      <path d="M139.88,140.89l16.44,71.75h-32.76l16.32-71.75ZM118.74,109.18l-47.32,175.32h34.64l10.57-43.33h46.38l10.8,43.33h34.64l-47.32-175.32h-42.39Z" style="fill: #000000;"/>
+      <polygon points="246.77 109.16 256.34 237.86 226.16 154.6 197.39 154.6 194.81 237.86 162.81 109.16 132.52 109.16 180.6 284.48 212.66 284.48 217.43 192.42 251.29 284.48 283.58 284.48 283.58 284.41 277.3 109.16 246.77 109.16" style="fill: #000000;"/>
       <g style="clip-path: url(#clippath-1);">
-        <path d="M142.49,104.68c-1.74,0-2.82-.87-3.24-2.6l-6.03-24.47c-.43-1.74.23-2.6,1.96-2.6h20.22c1.74,0,2.82.87,3.24,2.6l6.03,24.47c.43,1.74-.23,2.6-1.96,2.6h-20.22Z" style="fill: #000000;"/>
+        <path d="M137.99,100.18c-1.74,0-2.82-.87-3.24-2.6l-6.03-24.47c-.43-1.74.23-2.6,1.96-2.6h20.22c1.74,0,2.82.87,3.24,2.6l6.03,24.47c.43,1.74-.23,2.6-1.96,2.6h-20.22Z" style="fill: #000000;"/>
       </g>
     </g>
   </g>
