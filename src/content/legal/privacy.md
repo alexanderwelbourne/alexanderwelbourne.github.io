@@ -1,6 +1,6 @@
 ---
 title: "Privacy Policy"
-date: "26/05/2025"
+date: "2025-05-26"
 ---
 
 # Privacy Notice
@@ -54,10 +54,10 @@ You can contact me at any time to exercise your UK GDPR rights:
 
 1. Access your data  
 2. Rectify inaccurate data  
-3. Erase your data (“right to be forgotten”)  
+3. Erase your data ("right to be forgotten")  
 4. Restrict or object to processing  
 5. Data portability  
-6. Lodge a complaint with the UK Information Commissioner’s Office (ico.org.uk)
+6. Lodge a complaint with the UK Information Commissioner's Office (ico.org.uk)
 
 I will respond within one calendar month.
 

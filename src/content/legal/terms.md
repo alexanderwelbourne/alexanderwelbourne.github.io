@@ -1,6 +1,6 @@
 ---
 title: "Terms of Use"
-date: "26/05/2025"
+date: "2025-05-26"
 ---
 
 
