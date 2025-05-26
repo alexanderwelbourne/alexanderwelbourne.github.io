@@ -1,27 +1,49 @@
 ---
 title: "Terms of Use"
-date: "03/07/2024"
+date: "26/05/2025"
 ---
 
-Please read these Terms of Use ("Terms", "Terms of Use") carefully before using the [Your Website URL] website (the "Service") operated by [Your Company Name] ("us", "we", or "our").
 
-#### Agreement to Terms
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+Terms of Use
 
-#### Intellectual Property Rights
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+Last updated : 26 May 2025
 
-#### User Representations
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+1. Who we are
 
-#### Links to Other Websites
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+welbourne.ai is the personal website of Alexander Welbourne (“I”, “me”, “my”). Contact : alex@welbourne.ai.
 
-#### Termination
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+2. Acceptance of these terms
 
-#### Governing Law
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+By accessing or using this site you agree to be bound by these Terms of Use.
 
-#### Changes to These Terms of Use
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+3. Permitted use
+
+You may read, link to and share content for non-commercial purposes.
+You must not
+	•	scrape or harvest data;
+	•	upload or inject malicious code;
+	•	represent my work as your own.
+
+4. Intellectual-property
+
+Unless otherwise noted, all code, text and images on welbourne.ai are © Alexander Welbourne 2025. You may quote or share excerpts under the [CC BY-NC 4.0] licence with attribution. Commercial use requires my prior written consent.
+
+5. External links
+
+Third-party links are provided for convenience only; I do not endorse or accept responsibility for their content.  ￼
+
+6. No warranty
+
+The site and its content are provided “as-is” with no warranties of any kind and no guarantee of correctness or availability.  ￼
+
+7. Limitation of liability
+
+To the fullest extent permitted by law, I shall not be liable for any indirect, consequential or special losses arising from your use of this site. Maximum aggregate liability is £0.
+
+8. Changes
+
+I may update these terms at any time. The “Last updated” date will change; continued use after that date constitutes acceptance.
+
+9. Governing law
+
+These terms are governed by the laws of England & Wales and subject to the exclusive jurisdiction of its courts.
