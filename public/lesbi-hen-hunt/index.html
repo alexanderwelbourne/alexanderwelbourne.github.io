@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesbihen Thrift Hunt 🐔</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        :root {
+          --bg: #1a0a2e;
+          --card: #231040;
+          --accent1: #ff6b9d;
+          --accent2: #c084fc;
+          --accent3: #fb923c;
+          --gold: #fbbf24;
+          --text: #f5e6ff;
+          --muted: #a78bca;
+          --border: rgba(192, 132, 252, 0.25);
+        }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: ‘DM Mono’, monospace;
+      min-height: 100vh;
+      padding: 0 0 60px;
+      background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(192, 132, 252, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(255, 107, 157, 0.1) 0%, transparent 50%);
+      }
+
+      header {
+      text-align: center;
+      padding: 40px 20px 28px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      }
+
+      .emoji-row {
+      font-size: 1.6rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+      }
+
+      h1 {
+      font-family: ‘Playfair Display’, serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--accent2);
+      line-height: 1.1;
+      margin-bottom: 4px;
+      }
+
+      h1 span {
+      color: var(--accent1);
+      font-style: italic;
+      }
+
+      .subtitle {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 10px;
+      }
+
+      .rules-box {
+      margin: 24px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      }
+
+      .rules-box h2 {
+      font-family: ‘Playfair Display’, serif;
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+      }
+
+      .rules-box ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      }
+
+      .rules-box li {
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.5;
+      }
+
+      .rules-box li::before {
+      content: ‘→’;
+      position: absolute;
+      left: 0;
+      color: var(--accent1);
+      }
+
+      .rules-box li strong {
+      color: var(--text);
+      }
+
+      .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      padding: 0 16px;
+      margin: 28px 0 12px;
+      }
+
+      .challenge-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 16px;
+      }
+
+      .challenge {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: start;
+      transition: border-color 0.2s, opacity 0.2s, background 0.2s;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      }
+
+      .challenge:active {
+      border-color: var(--accent2);
+      }
+
+      .challenge.done {
+      opacity: 0.5;
+      border-color: rgba(74, 222, 128, 0.4);
+      background: rgba(74, 222, 128, 0.05);
+      }
+
+      .challenge.done .challenge-text {
+      text-decoration: line-through;
+      color: var(--muted);
+      }
+
+      .challenge.done .pts {
+      color: #4ade80 !important;
+      }
+
+      .challenge.done::before {
+      content: ‘✓’;
+      position: absolute;
+      right: 70px;
+      color: #4ade80;
+      font-size: 0.8rem;
+      }
+
+      .challenge { position: relative; }
+
+      .progress-bar-wrap {
+      margin: 0 16px 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      }
+
+      .progress-bar-bg {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 99px;
+      overflow: hidden;
+      }
+
+      .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent2), var(--accent1));
+      border-radius: 99px;
+      width: 0%;
+      transition: width 0.3s ease;
+      }
+
+      .progress-label {
+      font-size: 0.68rem;
+      color: var(--muted);
+      white-space: nowrap;
+      }
+
+      .progress-label span {
+      color: var(--accent2);
+      font-weight: 500;
+      }
+
+      .challenge-text {
+      font-size: 0.78rem;
+      line-height: 1.55;
+      color: var(--text);
+      }
+
+      .challenge-text .tag {
+      display: inline-block;
+      font-size: 0.6rem;
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--gold);
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-left: 6px;
+      letter-spacing: 0.05em;
+      vertical-align: middle;
+      }
+
+      .challenge-text .tag.sarah {
+      background: rgba(255, 107, 157, 0.15);
+      color: var(--accent1);
+      }
+
+      .challenge-text .tag.hen {
+      background: rgba(192, 132, 252, 0.15);
+      color: var(--accent2);
+      }
+
+      .points-badge {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      text-align: center;
+      min-width: 48px;
+      flex-shrink: 0;
+      }
+
+      .points-badge .pts {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--accent2);
+      display: block;
+      line-height: 1;
+      }
+
+      .points-badge .label {
+      font-size: 0.55rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      }
+
+      .points-badge.two .pts { color: var(--accent3); }
+      .points-badge.three .pts { color: var(--gold); }
+
+      .bonus-note {
+      margin: 18px 16px 0;
+      background: rgba(255, 107, 157, 0.08);
+      border: 1px dashed rgba(255, 107, 157, 0.35);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.6;
+      }
+
+      .bonus-note strong { color: var(--accent1); }
+
+      .final-challenge {
+      margin: 28px 16px 0;
+      background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(255,107,157,0.08));
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      border-radius: 14px;
+      padding: 22px 20px;
+      }
+
+      .final-challenge h2 {
+      font-family: ‘Playfair Display’, serif;
+      font-size: 1.25rem;
+      color: var(--gold);
+      margin-bottom: 8px;
+      }
+
+      .final-challenge p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 6px;
+      }
+
+      .final-challenge p strong { color: var(--text); }
+
+      .score-tally {
+      margin: 28px 16px 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      }
+
+      .score-tally h2 {
+      font-family: ‘Playfair Display’, serif;
+      font-size: 1rem;
+      color: var(--accent2);
+      margin-bottom: 16px;
+      }
+
+      .team-row {
+      display: grid;
+      grid-template-columns: 1fr 80px 80px;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      }
+
+      .team-row:last-child { border-bottom: none; }
+
+      .team-row .team-name {
+      font-size: 0.75rem;
+      color: var(--text);
+      }
+
+      .team-row .score-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      height: 32px;
+      font-size: 0.6rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.1em;
+      }
+
+      .tally-header {
+      display: grid;
+      grid-template-columns: 1fr 80px 80px;
+      gap: 8px;
+      margin-bottom: 6px;
+      }
+
+      .tally-header span {
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-align: center;
+      }
+
+      .tally-header span:first-child { text-align: left; }
+
+      .scorer-intro {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+      }
+
+      .scorer-section-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin: 18px 0 10px;
+      }
+
+      .vote-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      }
+
+      .vote-row:last-of-type { border-bottom: none; }
+
+      .vote-label {
+      font-size: 0.7rem;
+      color: var(--text);
+      flex: 1;
+      line-height: 1.4;
+      }
+
+      .vote-buttons {
+      display: flex;
+      gap: 5px;
+      flex-shrink: 0;
+      }
+
+      .vbtn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-family: ‘DM Mono’, monospace;
+      font-size: 0.65rem;
+      padding: 5px 9px;
+      cursor: pointer;
+      transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent;
+      }
+
+      .vbtn:active { opacity: 0.7; }
+
+      .vbtn.active {
+      background: var(--accent2);
+      border-color: var(--accent2);
+      color: var(--bg);
+      font-weight: 500;
+      }
+
+      .totals-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-top: 24px;
+      }
+
+      .total-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+      transition: border-color 0.3s, background 0.3s;
+      }
+
+      .total-card.winner {
+      border-color: var(--gold);
+      background: rgba(251, 191, 36, 0.08);
+      }
+
+      .total-team {
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      }
+
+      .total-score {
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--accent2);
+      line-height: 1;
+      }
+
+      .total-card.winner .total-score { color: var(--gold); }
+
+      .total-label {
+      font-size: 0.55rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+      }
+
+      .scorer-note {
+      font-size: 0.65rem;
+      color: rgba(167, 139, 202, 0.5);
+      margin-top: 16px;
+      line-height: 1.6;
+      text-align: center;
+      }
+
+      footer {
+      text-align: center;
+      padding: 40px 20px 0;
+      font-size: 0.65rem;
+      color: rgba(167, 139, 202, 0.4);
+      letter-spacing: 0.1em;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+        
+      <div class="emoji-row">🐔 💜 🏳️‍🌈 🐔</div>
+        
+      <h1>Lesbi<span>hen</span><br />Thrift Hunt</h1>
+        
+      <div class="subtitle">
+        Sarah's Hen Do &nbsp;·&nbsp; 3 Teams &nbsp;·&nbsp; May the best hens win
+      </div>
+    </header>
+
+    <div class="rules-box">
+        
+      <h2>How it works</h2>
+        
+      <ul>
+            
+        <li>
+          Split into <strong>3 teams of 3</strong>. You have
+          <strong>~2 hours</strong>.
+        </li>
+            
+        <li>
+          Find items, take photos as proof — you don't have to buy them (except
+          the final challenge).
+        </li>
+            
+        <li>
+          Earn <strong>+1 bonus point</strong> on ANY challenge for a creative,
+          funny, or extra-fabulous photo.
+        </li>
+            
+        <li>
+          Tally scores at the end.
+          <strong>Sarah judges the final challenge.</strong>
+        </li>
+            
+        <li>Disputes settled by vibes.</li>
+          
+      </ul>
+    </div>
+
+    <!-- PROGRESS BAR -->
+
+    <div class="progress-bar-wrap">
+        
+      <div class="progress-bar-bg">
+            
+        <div class="progress-bar-fill" id="progressFill"></div>
+          
+      </div>
+        
+      <div class="progress-label">
+        <span id="progressCount">0</span> / 16 done
+      </div>
+    </div>
+
+    <!-- 1PT CHALLENGES -->
+
+    <div class="section-label">1 point each — the classics</div>
+    <div class="challenge-list">
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">Something with a cat on it</div>
+            
+        <div class="points-badge">
+          <span class="pts">1</span><span class="label">pt</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          Something orange, black, or Halloween-coded
+        </div>
+            
+        <div class="points-badge">
+          <span class="pts">1</span><span class="label">pt</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          Something with a plant, flower, or leaf on it
+        </div>
+            
+        <div class="points-badge">
+          <span class="pts">1</span><span class="label">pt</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          The most impressive thing you can find for under £1
+          <span class="tag">group votes +1</span>
+        </div>
+            
+        <div class="points-badge">
+          <span class="pts">1</span><span class="label">pt</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          A truly terrible piece of art <span class="tag">group votes +1</span>
+        </div>
+            
+        <div class="points-badge">
+          <span class="pts">1</span><span class="label">pt</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          A book with a title that could be a euphemism
+        </div>
+            
+        <div class="points-badge">
+          <span class="pts">1</span><span class="label">pt</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">Something rainbow</div>
+            
+        <div class="points-badge">
+          <span class="pts">1</span><span class="label">pt</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          A party outfit for one person (top + bottom or dress) — try it on for
+          the bonus point
+        </div>
+            
+        <div class="points-badge">
+          <span class="pts">1</span><span class="label">pt</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          Something that absolutely should not exist
+          <span class="tag">group votes +1</span>
+        </div>
+            
+        <div class="points-badge">
+          <span class="pts">1</span><span class="label">pt</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">A piece of silver jewellery</div>
+            
+        <div class="points-badge">
+          <span class="pts">1</span><span class="label">pt</span>
+        </div>
+          
+      </div>
+    </div>
+
+    <!-- 2PT CHALLENGES -->
+
+    <div class="section-label">2 points each — a bit harder</div>
+    <div class="challenge-list">
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          Something that Sarah would actually wear
+          <span class="tag sarah">Sarah votes +1</span>
+        </div>
+            
+        <div class="points-badge two">
+          <span class="pts">2</span><span class="label">pts</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          A wedding or bridal item — tackier = more points
+          <span class="tag">group votes +1</span>
+        </div>
+            
+        <div class="points-badge two">
+          <span class="pts">2</span><span class="label">pts</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          Something that screams "Manpreet & Sarah" — you'll know it when you
+          see it <span class="tag sarah">Sarah votes +1</span>
+        </div>
+            
+        <div class="points-badge two">
+          <span class="pts">2</span><span class="label">pts</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          Get a photo recreating a famous image or film scene using things you
+          find in the shop
+        </div>
+            
+        <div class="points-badge two">
+          <span class="pts">2</span><span class="label">pts</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          Find something from before 1990 — oldest item wins the 2 pts if
+          there's a tie-break
+        </div>
+            
+        <div class="points-badge two">
+          <span class="pts">2</span><span class="label">pts</span>
+        </div>
+          
+      </div>
+
+        
+      <div class="challenge">
+            
+        <div class="challenge-text">
+          The most "witch energy" item you can find — crystals, candles,
+          cauldrons, mysterious vibes <span class="tag">group votes +1</span>
+        </div>
+            
+        <div class="points-badge two">
+          <span class="pts">2</span><span class="label">pts</span>
+        </div>
+          
+      </div>
+    </div>
+
+    <div class="bonus-note">
+        📸 <strong>Bonus point rule:</strong> On ANY challenge above, earn an
+      extra point for a creative, posed, or genuinely funny photo. No half
+      measures — it has to make the group chat.
+    </div>
+
+    <!-- FINAL CHALLENGE -->
+
+    <div class="final-challenge">
+        
+      <h2>⭐ The Final Challenge</h2>
+        
+      <p>
+        <strong>Each person</strong> (not team — everyone!) must find and buy
+        one item for <strong>£1 or under</strong> that is either:
+      </p>
+        
+      <p>
+        🐔 &nbsp;A perfect <strong>hen do memento</strong>, or<br />💜
+        &nbsp;Something that <strong>reminds you of Sarah</strong>
+      </p>
+        
+      <p>
+        Sarah judges all entries at the end and picks her favourite.
+        <strong>Winning team gets 3 bonus points.</strong>
+      </p>
+        
+      <p
+        style="
+          margin-top: 10px;
+          font-size: 0.68rem;
+          color: rgba(251, 191, 36, 0.6);
+        "
+      >
+        Worth: 3pts to the team whose entry Sarah loves most
+      </p>
+    </div>
+
+    <!-- SCORE TALLY -->
+
+    <div class="score-tally">
+        
+      <h2>📊 Score it up</h2>
+        
+      <p class="scorer-intro">
+        Tap to award bonus votes, then see the final scores below.
+      </p>
+
+        <!-- PHOTO BONUSES -->
+
+        
+      <div class="scorer-section-label">📸 Photo bonus — which team?</div>
+        
+      <div class="vote-row">
+            
+        <div class="vote-label">Creative photo bonus</div>
+            
+        <div class="vote-buttons" data-bonus="photo">
+                <button class="vbtn" data-team="0">T1</button>       <button
+            class="vbtn"
+            data-team="1"
+          >
+            T2
+          </button>
+                <button class="vbtn" data-team="2">T3</button>       <button
+            class="vbtn"
+            data-team="-1"
+          >
+            None
+          </button>
+              
+        </div>
+          
+      </div>
+
+        <!-- GROUP VOTES -->
+
+        
+      <div class="scorer-section-label">🗳️ Group votes — which team wins?</div>
+        
+      <div class="vote-row">
+            
+        <div class="vote-label">Best under £1 find</div>
+            
+        <div class="vote-buttons" data-bonus="under1">
+                <button class="vbtn" data-team="0">T1</button>       <button
+            class="vbtn"
+            data-team="1"
+          >
+            T2
+          </button>
+                <button class="vbtn" data-team="2">T3</button>     
+        </div>
+          
+      </div>
+        
+      <div class="vote-row">
+            
+        <div class="vote-label">Worst piece of art</div>
+            
+        <div class="vote-buttons" data-bonus="art">
+                <button class="vbtn" data-team="0">T1</button>       <button
+            class="vbtn"
+            data-team="1"
+          >
+            T2
+          </button>
+                <button class="vbtn" data-team="2">T3</button>     
+        </div>
+          
+      </div>
+        
+      <div class="vote-row">
+            
+        <div class="vote-label">Should not exist</div>
+            
+        <div class="vote-buttons" data-bonus="exist">
+                <button class="vbtn" data-team="0">T1</button>       <button
+            class="vbtn"
+            data-team="1"
+          >
+            T2
+          </button>
+                <button class="vbtn" data-team="2">T3</button>     
+        </div>
+          
+      </div>
+        
+      <div class="vote-row">
+            
+        <div class="vote-label">Tackiest bridal item</div>
+            
+        <div class="vote-buttons" data-bonus="bridal">
+                <button class="vbtn" data-team="0">T1</button>       <button
+            class="vbtn"
+            data-team="1"
+          >
+            T2
+          </button>
+                <button class="vbtn" data-team="2">T3</button>     
+        </div>
+          
+      </div>
+        
+      <div class="vote-row">
+            
+        <div class="vote-label">Best witch energy</div>
+            
+        <div class="vote-buttons" data-bonus="witch">
+                <button class="vbtn" data-team="0">T1</button>       <button
+            class="vbtn"
+            data-team="1"
+          >
+            T2
+          </button>
+                <button class="vbtn" data-team="2">T3</button>     
+        </div>
+          
+      </div>
+
+        <!-- SARAH VOTES -->
+
+        
+      <div class="scorer-section-label">💜 Sarah votes — which team wins?</div>
+        
+      <div class="vote-row">
+            
+        <div class="vote-label">Thing Sarah would wear</div>
+            
+        <div class="vote-buttons" data-bonus="wear">
+                <button class="vbtn" data-team="0">T1</button>       <button
+            class="vbtn"
+            data-team="1"
+          >
+            T2
+          </button>
+                <button class="vbtn" data-team="2">T3</button>     
+        </div>
+          
+      </div>
+        
+      <div class="vote-row">
+            
+        <div class="vote-label">Manpreet & Sarah item</div>
+            
+        <div class="vote-buttons" data-bonus="couple">
+                <button class="vbtn" data-team="0">T1</button>       <button
+            class="vbtn"
+            data-team="1"
+          >
+            T2
+          </button>
+                <button class="vbtn" data-team="2">T3</button>     
+        </div>
+          
+      </div>
+
+        <!-- FINAL CHALLENGE WINNER -->
+
+        
+      <div class="scorer-section-label">
+        ⭐ Final challenge — Sarah's favourite
+      </div>
+        
+      <div class="vote-row">
+            
+        <div class="vote-label">Best £1 memento</div>
+            
+        <div class="vote-buttons" data-bonus="memento">
+                <button class="vbtn" data-team="0">T1</button>       <button
+            class="vbtn"
+            data-team="1"
+          >
+            T2
+          </button>
+                <button class="vbtn" data-team="2">T3</button>     
+        </div>
+          
+      </div>
+
+        <!-- TOTALS -->
+
+        
+      <div class="totals-wrap">
+            
+        <div class="total-card" id="total-0">
+                
+          <div class="total-team">Team 1</div>
+                
+          <div class="total-score" id="score-0">0</div>
+                
+          <div class="total-label">points</div>
+              
+        </div>
+            
+        <div class="total-card" id="total-1">
+                
+          <div class="total-team">Team 2</div>
+                
+          <div class="total-score" id="score-1">0</div>
+                
+          <div class="total-label">points</div>
+              
+        </div>
+            
+        <div class="total-card" id="total-2">
+                
+          <div class="total-team">Team 3</div>
+                
+          <div class="total-score" id="score-2">0</div>
+                
+          <div class="total-label">points</div>
+              
+        </div>
+          
+      </div>
+        
+      <p class="scorer-note">
+        Challenge points are counted separately per team's own ticked sheet —
+        add them to the bonus votes above for the final total.
+      </p>
+    </div>
+
+    <footer>made with love for sarah's big day 🐔💜</footer>
+
+    <script>
+      const STORAGE_KEY = 'lesbi-hen-hunt';
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"challenges":[],"bonuses":{}}');
+
+      // Challenges
+      const challenges = document.querySelectorAll(".challenge");
+      const total = challenges.length;
+
+      function updateProgress() {
+        const done = document.querySelectorAll(".challenge.done").length;
+        document.getElementById("progressCount").textContent = done;
+        document.getElementById("progressFill").style.width = (done / total) * 100 + "%";
+      }
+
+      function saveChallenges() {
+        saved.challenges = [];
+        challenges.forEach((c, i) => { if (c.classList.contains("done")) saved.challenges.push(i); });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      }
+
+      // Restore challenge state
+      saved.challenges.forEach(i => { if (challenges[i]) challenges[i].classList.add("done"); });
+      updateProgress();
+
+      challenges.forEach((c) => {
+        c.addEventListener("click", () => {
+          c.classList.toggle("done");
+          updateProgress();
+          saveChallenges();
+        });
+      });
+
+      // Bonus votes
+      const bonusPoints = Object.assign({}, saved.bonuses);
+      const bonusValues = { memento: 3 };
+
+      document.querySelectorAll(".vote-buttons").forEach((group) => {
+        const bonus = group.dataset.bonus;
+
+        // Restore vote UI
+        if (bonusPoints[bonus] !== undefined) {
+          group.querySelectorAll(".vbtn").forEach((btn) => {
+            if (parseInt(btn.dataset.team) === bonusPoints[bonus]) btn.classList.add("active");
+          });
+        }
+
+        group.querySelectorAll(".vbtn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            group.querySelectorAll(".vbtn").forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            bonusPoints[bonus] = parseInt(btn.dataset.team);
+            saved.bonuses = bonusPoints;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+            updateTotals();
+          });
+        });
+      });
+
+      function updateTotals() {
+        const scores = [0, 0, 0];
+        Object.entries(bonusPoints).forEach(([key, team]) => {
+          if (team >= 0) scores[team] += bonusValues[key] || 1;
+        });
+        scores.forEach((s, i) => { document.getElementById("score-" + i).textContent = s; });
+        const max = Math.max(...scores);
+        for (let i = 0; i < 3; i++) {
+          document.getElementById("total-" + i).classList.toggle("winner", scores[i] === max && max > 0);
+        }
+      }
+
+      updateTotals();
+    </script>
+  </body>
+</html>
