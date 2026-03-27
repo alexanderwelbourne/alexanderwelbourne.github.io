@@ -515,6 +515,118 @@
       border-color: var(--accent2);
       }
 
+      .team-score-wrap {
+      margin: 28px 16px 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      }
+
+      .team-score-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+      }
+
+      .team-score-value {
+      font-size: 3.5rem;
+      font-weight: 500;
+      color: var(--accent2);
+      line-height: 1;
+      font-family: 'DM Mono', monospace;
+      }
+
+      .team-score-sub {
+      font-size: 0.62rem;
+      color: var(--muted);
+      margin-top: 8px;
+      }
+
+      .bonus-pts-badge {
+      display: inline-block;
+      font-size: 0.58rem;
+      background: rgba(192, 132, 252, 0.12);
+      color: var(--accent2);
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-left: 6px;
+      letter-spacing: 0.05em;
+      vertical-align: middle;
+      }
+
+      .bonus-pts-badge.gold {
+      background: rgba(251, 191, 36, 0.12);
+      color: var(--gold);
+      }
+
+      .breakdown-table {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      }
+
+      .breakdown-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 6px;
+      padding: 0 8px 6px;
+      border-bottom: 1px solid var(--border);
+      }
+
+      .breakdown-header span {
+      font-size: 0.55rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      }
+
+      .breakdown-header span:first-child { text-align: left; }
+
+      .breakdown-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 6px;
+      padding: 10px 8px;
+      border-radius: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      align-items: center;
+      transition: border-color 0.3s, background 0.3s;
+      }
+
+      .breakdown-row.winner {
+      border-color: var(--gold);
+      background: rgba(251, 191, 36, 0.08);
+      }
+
+      .breakdown-team {
+      font-size: 0.72rem;
+      color: var(--text);
+      }
+
+      .breakdown-cell {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-align: center;
+      }
+
+      .breakdown-total {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--accent2);
+      text-align: center;
+      line-height: 1;
+      }
+
+      .breakdown-row.winner .breakdown-total { color: var(--gold); }
+
       .scorer-note {
       font-size: 0.65rem;
       color: rgba(167, 139, 202, 0.5);
@@ -849,6 +961,14 @@
       </p>
     </div>
 
+    <!-- TEAM SCORE -->
+
+    <div class="team-score-wrap">
+      <div class="team-score-label">your team's challenge score</div>
+      <div class="team-score-value" id="teamScore">0</div>
+      <div class="team-score-sub">pts — tap challenges above to mark them done</div>
+    </div>
+
     <!-- SCORE TALLY -->
 
     <div class="score-tally">
@@ -1050,38 +1170,31 @@
         <!-- TOTALS -->
 
         
-      <div class="totals-wrap">
-            
-        <div class="total-card" id="total-0">
-                
-          <div class="total-team">Team 1</div>
-                
-          <div class="total-score" id="score-0">0</div>
-                
-          <div class="total-label">points</div>
-              
+      <div class="breakdown-table">
+        <div class="breakdown-header">
+          <span></span>
+          <span>challenges</span>
+          <span>bonuses</span>
+          <span>total</span>
         </div>
-            
-        <div class="total-card" id="total-1">
-                
-          <div class="total-team">Team 2</div>
-                
-          <div class="total-score" id="score-1">0</div>
-                
-          <div class="total-label">points</div>
-              
+        <div class="breakdown-row" id="total-0">
+          <span class="breakdown-team">Team 1</span>
+          <span class="breakdown-cell" id="bk-ch-0">0</span>
+          <span class="breakdown-cell" id="bk-bo-0">0</span>
+          <span class="breakdown-total" id="score-0">0</span>
         </div>
-            
-        <div class="total-card" id="total-2">
-                
-          <div class="total-team">Team 3</div>
-                
-          <div class="total-score" id="score-2">0</div>
-                
-          <div class="total-label">points</div>
-              
+        <div class="breakdown-row" id="total-1">
+          <span class="breakdown-team">Team 2</span>
+          <span class="breakdown-cell" id="bk-ch-1">0</span>
+          <span class="breakdown-cell" id="bk-bo-1">0</span>
+          <span class="breakdown-total" id="score-1">0</span>
         </div>
-          
+        <div class="breakdown-row" id="total-2">
+          <span class="breakdown-team">Team 3</span>
+          <span class="breakdown-cell" id="bk-ch-2">0</span>
+          <span class="breakdown-cell" id="bk-bo-2">0</span>
+          <span class="breakdown-total" id="score-2">0</span>
+        </div>
       </div>
         
       <p class="scorer-note">
@@ -1101,9 +1214,16 @@
       const total = challenges.length;
 
       function updateProgress() {
-        const done = document.querySelectorAll(".challenge.done").length;
+        let done = 0, pts = 0;
+        challenges.forEach(c => {
+          if (c.classList.contains("done")) {
+            done++;
+            pts += parseInt(c.querySelector(".pts").textContent) || 0;
+          }
+        });
         document.getElementById("progressCount").textContent = done;
         document.getElementById("progressFill").style.width = (done / total) * 100 + "%";
+        document.getElementById("teamScore").textContent = pts;
       }
 
       function saveChallenges() {
@@ -1141,6 +1261,14 @@
 
       document.querySelectorAll(".vote-buttons").forEach((group) => {
         const bonus = group.dataset.bonus;
+        const pts = bonusValues[bonus] || 1;
+
+        // Inject points badge into the vote-label
+        const label = group.closest(".vote-row").querySelector(".vote-label");
+        const badge = document.createElement("span");
+        badge.className = "bonus-pts-badge" + (pts > 1 ? " gold" : "");
+        badge.textContent = "+" + pts + (pts === 1 ? "pt" : "pts");
+        label.appendChild(badge);
 
         // Restore vote UI
         if (bonusPoints[bonus] !== undefined) {
@@ -1162,14 +1290,20 @@
       });
 
       function updateTotals() {
-        const scores = [0, 1, 2].map(i => parseInt(cscoreInputs[i].value) || 0);
+        const challengeScores = [0, 1, 2].map(i => parseInt(cscoreInputs[i].value) || 0);
+        const bonusScores = [0, 0, 0];
         Object.entries(bonusPoints).forEach(([key, team]) => {
-          if (team >= 0) scores[team] += bonusValues[key] || 1;
+          if (team >= 0) bonusScores[team] += bonusValues[key] || 1;
         });
-        scores.forEach((s, i) => { document.getElementById("score-" + i).textContent = s; });
-        const max = Math.max(...scores);
+        const totals = challengeScores.map((c, i) => c + bonusScores[i]);
         for (let i = 0; i < 3; i++) {
-          document.getElementById("total-" + i).classList.toggle("winner", scores[i] === max && max > 0);
+          document.getElementById("bk-ch-" + i).textContent = challengeScores[i];
+          document.getElementById("bk-bo-" + i).textContent = bonusScores[i];
+          document.getElementById("score-" + i).textContent = totals[i];
+        }
+        const max = Math.max(...totals);
+        for (let i = 0; i < 3; i++) {
+          document.getElementById("total-" + i).classList.toggle("winner", totals[i] === max && max > 0);
         }
       }
 
