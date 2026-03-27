@@ -471,6 +471,50 @@
       margin-top: 4px;
       }
 
+      .challenge-scores {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 4px;
+      }
+
+      .cscore-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      }
+
+      .cscore-row:last-child { border-bottom: none; }
+
+      .cscore-label {
+      font-size: 0.7rem;
+      color: var(--text);
+      }
+
+      .cscore-input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--accent2);
+      font-family: 'DM Mono', monospace;
+      font-size: 1rem;
+      font-weight: 500;
+      width: 64px;
+      padding: 5px 8px;
+      text-align: center;
+      -moz-appearance: textfield;
+      }
+
+      .cscore-input::-webkit-outer-spin-button,
+      .cscore-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+      .cscore-input:focus {
+      outline: none;
+      border-color: var(--accent2);
+      }
+
       .scorer-note {
       font-size: 0.65rem;
       color: rgba(167, 139, 202, 0.5);
@@ -810,10 +854,26 @@
     <div class="score-tally">
         
       <h2>📊 Score it up</h2>
-        
+
       <p class="scorer-intro">
-        Tap to award bonus votes, then see the final scores below.
+        Enter each team's challenge points, award bonus votes, then see the final total below.
       </p>
+
+      <div class="scorer-section-label">🏆 Challenge points — enter each team's score</div>
+      <div class="challenge-scores">
+        <div class="cscore-row">
+          <label class="cscore-label">Team 1</label>
+          <input class="cscore-input" id="cscore-0" type="number" min="0" max="99" value="0" />
+        </div>
+        <div class="cscore-row">
+          <label class="cscore-label">Team 2</label>
+          <input class="cscore-input" id="cscore-1" type="number" min="0" max="99" value="0" />
+        </div>
+        <div class="cscore-row">
+          <label class="cscore-label">Team 3</label>
+          <input class="cscore-input" id="cscore-2" type="number" min="0" max="99" value="0" />
+        </div>
+      </div>
 
         <!-- PHOTO BONUSES -->
 
@@ -1025,8 +1085,7 @@
       </div>
         
       <p class="scorer-note">
-        Challenge points are counted separately per team's own ticked sheet —
-        add them to the bonus votes above for the final total.
+        Challenge points + bonus votes = final total shown above.
       </p>
     </div>
 
@@ -1034,7 +1093,8 @@
 
     <script>
       const STORAGE_KEY = 'lesbi-hen-hunt';
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"challenges":[],"bonuses":{}}');
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"challenges":[],"bonuses":{},"cscores":[0,0,0]}');
+      if (!saved.cscores) saved.cscores = [0, 0, 0];
 
       // Challenges
       const challenges = document.querySelectorAll(".challenge");
@@ -1061,6 +1121,17 @@
           c.classList.toggle("done");
           updateProgress();
           saveChallenges();
+        });
+      });
+
+      // Challenge score inputs
+      const cscoreInputs = [0, 1, 2].map(i => document.getElementById("cscore-" + i));
+      cscoreInputs.forEach((input, i) => {
+        input.value = saved.cscores[i] || 0;
+        input.addEventListener("input", () => {
+          saved.cscores[i] = parseInt(input.value) || 0;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+          updateTotals();
         });
       });
 
@@ -1091,7 +1162,7 @@
       });
 
       function updateTotals() {
-        const scores = [0, 0, 0];
+        const scores = [0, 1, 2].map(i => parseInt(cscoreInputs[i].value) || 0);
         Object.entries(bonusPoints).forEach(([key, team]) => {
           if (team >= 0) scores[team] += bonusValues[key] || 1;
         });
