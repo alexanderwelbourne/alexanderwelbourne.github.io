@@ -1,7 +1,13 @@
-import { defineCollection, z } from "astro:content"
+import { defineCollection } from "astro:content"
+import { z } from "astro/zod"
+import { glob } from "astro/loaders"
+
+// Mirrors the legacy collection rules: md/mdx entries, skipping files or folders prefixed with "_"
+const content = (dir: string) =>
+  glob({ pattern: ["**/*.{md,mdx}", "!**/_*", "!**/_*/**"], base: `./src/content/${dir}` })
 
 const work = defineCollection({
-  type: "content",
+  loader: content("work"),
   schema: z.object({
     company: z.string(),
     role: z.string(),
@@ -11,7 +17,7 @@ const work = defineCollection({
 })
 
 const blog = defineCollection({
-  type: "content",
+  loader: content("blog"),
   schema: z.object({
     title: z.string(),
     summary: z.string(),
@@ -22,7 +28,7 @@ const blog = defineCollection({
 })
 
 const projects = defineCollection({
-  type: "content",
+  loader: content("projects"),
   schema: z.object({
     title: z.string(),
     summary: z.string(),
@@ -35,7 +41,7 @@ const projects = defineCollection({
 })
 
 const legal = defineCollection({
-  type: "content",
+  loader: content("legal"),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),

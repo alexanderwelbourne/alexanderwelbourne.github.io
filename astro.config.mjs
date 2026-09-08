@@ -1,11 +1,14 @@
 import { defineConfig } from "astro/config"
 import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
-import tailwind from "@astrojs/tailwind"
 import solidJs from "@astrojs/solid-js"
+import tailwindcss from "@tailwindcss/vite"
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.welbourne.ai",
-  integrations: [mdx(), sitemap(), solidJs(), tailwind({ applyBaseStyles: false })],
+  // Astro 7 defaults to JSX-style whitespace stripping, which removes visible spaces between inline elements
+  compressHTML: true,
+  integrations: [mdx(), sitemap(), solidJs()],
+  vite: { plugins: [tailwindcss()] },
 })
